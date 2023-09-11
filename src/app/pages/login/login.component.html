@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>To Do</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+        <ion-grid [fixed]="true">
+            <form [formGroup]="form" (ngSubmit)="loginAndGetProfile()">
+                <ion-input
+                type="email"
+                fill="solid"
+                label="Email"
+                inputmode="email"
+                labelPlacement="floating"
+                errorText="Invalid email"
+                email
+                formControlName="email"
+                >
+            </ion-input>
+            <ion-input
+                type="password"
+                fill="solid"
+                label="password"
+                labelPlacement="floating"
+                errorText="Fill the password"
+                formControlName="password"
+                >
+            </ion-input>
+            <ion-row class="ion-justify-content-around">
+                <ion-button 
+                expand="block"
+                type="submit"
+                Type="forward"
+                [disabled]="form.invalid"
+                >
+                    Log In
+                </ion-button>
+
+                <ion-button 
+                color="tertiary"
+                expand="block"
+                type="button"
+                Type="forward"
+                routerDirection="forward"
+                routerLink="/register"
+                >
+                    Don't have an account?
+                </ion-button>
+            </ion-row>
+            </form>
+        <div *ngIf="incorrectForm">
+            El correo o la contrase&ntilde;a son incorrectos.
+        </div>
+        </ion-grid>
+</ion-content>

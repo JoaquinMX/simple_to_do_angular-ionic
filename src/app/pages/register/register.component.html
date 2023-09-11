@@ -1,0 +1,67 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button routerDirection="back" default-href="/" routerLink="/login"></ion-back-button>
+          </ion-buttons>
+        <ion-title>To Do</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+        <ion-grid [fixed]="true">
+            <form [formGroup]="form" (ngSubmit)="register()">
+                <ion-input
+                type="text"
+                fill="solid"
+                label="Name"
+                labelPlacement="floating"
+                errorText="Fill the name"
+                formControlName="name"
+                >
+            </ion-input>
+            <ion-input
+                type="email"
+                fill="solid"
+                label="Email"
+                inputmode="email"
+                labelPlacement="floating"
+                errorText="Invalid email"
+                email
+                formControlName="email"
+                >
+            </ion-input>
+            <ion-input
+                type="password"
+                fill="solid"
+                label="password"
+                labelPlacement="floating"
+                errorText="Fill the password"
+                formControlName="password"
+                >
+            </ion-input>
+
+            <ion-input
+            type="password"
+            fill="solid"
+            label="password"
+            labelPlacement="floating"
+            errorText="Fill the password"
+            formControlName="repeatPassword"
+            >
+             </ion-input>
+            <ion-row class="ion-justify-content-around">
+                <ion-button 
+                expand="block"
+                type="submit"
+                Type="forward"
+                [disabled]="form.invalid"
+                >
+                    Register
+                </ion-button>
+            </ion-row>
+            </form>
+        <div *ngIf="incorrectForm">
+            Las contraseñas no coinciden o el correo ya esta en uso.
+        </div>
+        </ion-grid>
+</ion-content>
