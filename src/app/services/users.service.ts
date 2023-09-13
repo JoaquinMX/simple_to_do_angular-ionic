@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User, CreateUserDTO } from '../model/user.model';
 import { TokenService } from './token.service';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
 
-  private apiUrl = "http://localhost:3000/users";
+  private apiUrl = `${environment.api_url}:${environment.api_port}/users`;
 
 
   constructor(

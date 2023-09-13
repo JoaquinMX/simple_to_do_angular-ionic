@@ -6,14 +6,14 @@ import { switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
 import { UsersService } from './users.service';
 import { ToDoService } from './to-do.service';
-import { response } from 'express';
-import { ToDo } from '../model/to_do.model';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = "http://localhost:3000/users";
+  private apiUrl = `${environment.api_url}:${environment.api_port}/users`;
   
   constructor(
     private http: HttpClient,

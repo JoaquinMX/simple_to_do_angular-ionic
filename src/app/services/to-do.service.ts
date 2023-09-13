@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { ToDo, UpdateToDoDTO } from '../model/to_do.model';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from './users.service';
-import { AuthService } from './auth.service';
-import { tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ToDoService {
-  private apiUrl = "http://localhost:3000/to_do";
+  private apiUrl = `${environment.api_url}:${environment.api_port}/to_do`;
 
   private ToDos: Array<ToDo> = [];
   constructor(
