@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private toDoService: ToDoService,
     private userService: UsersService,
-    private tokenService: TokenService,
     private modalCtrl: ModalController,
     private router: Router,
   ) {
@@ -41,10 +40,13 @@ export class HomeComponent implements OnInit {
   }
 
  async createTodo(description: String) {
-    this.toDoService.addTodo(description);
-     (await this.toDoService.getUserToDos(this.userService.getEmail()!)).subscribe(data => {
+    let now_at: Date = new Date(Date.now());
+    let email = this.userService.getEmail()!;
+    this.toDos = this.toDoService.addLocalTodo(description, email, now_at);
+    this.toDoService.addTodo(description, email, now_at);
+     (await this.toDoService.getUserToDos(this.userService.getEmail()!))/*.subscribe(data => {
       this.toDos = data;
-     })
+     })*/
     this.currentDescription = "";
   }
 

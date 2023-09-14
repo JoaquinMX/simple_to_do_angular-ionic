@@ -38,7 +38,6 @@ export class RegisterComponent {
         email: this.form.value.email,
         password: this.form.value.password
       }
-      console.log(this.form.value);
       this.usersService.create(newUser).subscribe((user) => {
         if (user) {
           this.router.navigate(['/login']);

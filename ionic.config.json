@@ -1,0 +1,7 @@
+{
+  "name": "simple_to_do_angular_ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

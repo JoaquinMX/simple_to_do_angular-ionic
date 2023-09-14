@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User, CreateUserDTO } from '../model/user.model';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../model/user.model';
 import { Auth } from '../model/auth.model';
 import { switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';

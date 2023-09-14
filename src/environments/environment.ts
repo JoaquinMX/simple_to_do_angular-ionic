@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    api_url: 'http://192.168.1.76',
-    api_port: '3000'
+    api_url: 'https://simple-to-do-node-express.adaptable.app',
+    api_port: ''
   };

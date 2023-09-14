@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToDo, UpdateToDoDTO } from '../model/to_do.model';
+import { CreateToDoDTO, ToDo, UpdateToDoDTO } from '../model/to_do.model';
 import { HttpClient } from '@angular/common/http';
 import { UsersService } from './users.service';
 import { environment } from 'src/environments/environment';
@@ -12,18 +12,41 @@ export class ToDoService {
   private ToDos: Array<ToDo> = [];
   constructor(
     private http: HttpClient,
-    private userService: UsersService,
   ) { }
 
- addTodo(description: String) {
-  let completed = false;
-  let email = this.userService.getEmail();
-  let created_at = Date.now();
-  let updated_at = Date.now();
+  addLocalTodo(description: String, email: String, now_at: Date) {
+    let newTodo: ToDo = {
+      description: description,
+      email: email,
+      completed: false,
+      created_at: now_at,
+      updated_at: now_at,
+      _id: `temporal_index${this.ToDos.length}`
+    }
+  this.ToDos.push(newTodo);
+  return this.ToDos;
+  }
+
+ addTodo(description: String, email: String, now_at: Date) {
+  let newTodo: ToDo = {
+    description: description,
+    email: email,
+    completed: false,
+    created_at: now_at,
+    updated_at: now_at,
+    _id: `temporal_index${this.ToDos.length}`
+  }
   this.http.post<ToDo>(`${this.apiUrl}/`, 
-  {toDo: {description, completed, created_at, updated_at, email}})
+  {toDo: {
+    description: newTodo.description, 
+    email: newTodo.email,
+    completed: newTodo.completed, 
+    created_at: newTodo.created_at, 
+    updated_at: newTodo.updated_at, 
+    }})
   .subscribe(rta => {
-    this.ToDos.push(rta);
+    this.ToDos[this.ToDos.length - 1] = rta;
+    return this.ToDos;
   });
   }
 
@@ -38,8 +61,6 @@ export class ToDoService {
   getToDos() {
     return this.ToDos;
   }
-
-
   async deleteTodo(id: String) {
     return this.http.delete<Array<ToDo>>(`${this.apiUrl}/${id}`);
   }
